@@ -1,0 +1,112 @@
+{
+  "primitives": {
+    "kem": "ML-KEM-768",
+    "sig": "ML-DSA-65"
+  },
+  "healthy": {
+    "established": true,
+    "g_phy": true,
+    "k_phy_bits": 128,
+    "keys_match": true,
+    "bdr_retained": 0.0022988505747126436,
+    "kdr_post": 0.0,
+    "retained_fraction": 0.7552083333333334,
+    "h_min_bits": 535.8157110142768,
+    "leak_bits": 256,
+    "budget_bits": 215.81571101427676,
+    "entropy": {
+      "n_symbols": 870,
+      "alphabet": 2,
+      "h_mcv": 0.705164003237834,
+      "h_markov": 0.6158801276026169,
+      "h_shannon": 0.985768259759233,
+      "h_collision": 0.9719055716298,
+      "h_min_per_symbol": 0.6158801276026169,
+      "h_min_total": 535.8157110142768,
+      "lag1_corr": 0.1947165757500565
+    },
+    "sizes": {
+      "flight1": 10047,
+      "flight2": 10263,
+      "W": 270,
+      "mconf": 105,
+      "flight3": 88,
+      "flight4": 100,
+      "fin_u": 55,
+      "fin_b": 55,
+      "handshake_total": 20713
+    },
+    "step_ms": {
+      "step1_ue": 24.664541007950902,
+      "step1_gnb": 20.65970900002867,
+      "step2_ue": 4.992792004486546,
+      "step2_gnb": 3.345875011291355,
+      "step3_gnb": 27.13912501349114,
+      "step3_ue": 25.504833000013605,
+      "step4_ue_local": 1.3260419946163893,
+      "step4_gnb_local": 0.3929999948013574,
+      "step4_ue_conf": 0.0069160014390945435,
+      "step4_ue_send": 0.010333984391763806,
+      "step4_gnb_recv": 0.18262499361298978,
+      "step4_ue_recv": 0.16537497867830098,
+      "step5_ue": 0.07216597441583872,
+      "step5_gnb": 0.05858400254510343,
+      "step6_ue_send": 7.242459018016234,
+      "step6_gnb_recv": 0.0109999964479357,
+      "step6_gnb_send": 0.00825000461190939,
+      "step6_ue_recv": 0.007124996045604348
+    },
+    "eve": {
+      "eve_snr_db": 33.67629958197581,
+      "eve_bdr_raw": 0.49885057471264366,
+      "eve_bdr_post": 0.49885057471264366,
+      "eve_recovers_z": 0.0,
+      "eve_decode_failed_blocks": 4.0,
+      "eve_key_match": 0.0
+    }
+  },
+  "fallback": {
+    "established": true,
+    "g_phy": false,
+    "k_phy_bits": 0,
+    "keys_match": true,
+    "bdr_retained": 0.4756944444444444,
+    "kdr_post": 0.4756944444444444,
+    "recon_failed_blocks": 4,
+    "d_u": false,
+    "d_b": false,
+    "r_u": false
+  },
+  "crypto_op_ms": {
+    "KEM.Decaps": {
+      "total_ms": 10.396792000392452,
+      "calls": 2,
+      "mean_ms": 5.198396000196226
+    },
+    "KEM.Encaps": {
+      "total_ms": 8.174290967872366,
+      "calls": 2,
+      "mean_ms": 4.087145483936183
+    },
+    "KEM.KeyGen": {
+      "total_ms": 5.971332982880995,
+      "calls": 2,
+      "mean_ms": 2.9856664914404973
+    },
+    "Sig.KeyGen": {
+      "total_ms": 29.33408398530446,
+      "calls": 3,
+      "mean_ms": 9.778027995101487
+    },
+    "Sig.Sign": {
+      "total_ms": 243.862709030509,
+      "calls": 6,
+      "mean_ms": 40.64378483841816
+    },
+    "Sig.Verify": {
+      "total_ms": 80.63153995317407,
+      "calls": 8,
+      "mean_ms": 10.078942494146759
+    }
+  }
+}

@@ -1,0 +1,5 @@
+numpy>=1.26
+matplotlib>=3.8
+cryptography>=42.0
+kyber-py>=1.2.0
+dilithium-py>=1.4.0

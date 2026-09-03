@@ -1,0 +1,65 @@
+==============================================================================
+REGIME A -- healthy link: authenticated PHY augmentation
+==============================================================================
+  Step1 UE  -> m1,sigma_U,Cert_U  (10047 B), sid=d07c7dd7931278c3
+  Step1 gNB : Verify(Cert_U,sigma_U,m1)=1, ReplayCheck=1
+  Step2     : probe_ctx bound, 24 rounds x 48 pilots, h_probe=3bf95d48198cbd97
+  Step3 gNB -> m2,sigma_B,Cert_B  (10263 B), |W|=270 B, leak=256 bits
+  Step3 UE  : sigma_B ok, K_PQC match=True
+  Step4     : T2=a58b4fc835d2d65e, BDR_raw=0.0023, KDR_post=0.0000, corrected=2
+  Step4 gate: g_U=True {'snr': True, 'rounds': True, 'reliability': True, 'entropy': True} | g_B=True {'snr': True, 'rounds': True, 'reliability': True, 'entropy': True}
+  Step4     : r_U=True, d_U=True, d_B=True, G_PHY=True, |K_PHY|=128 bits, match=True
+  Step4 Eve : BDR_raw=0.4989, BDR_post=0.4989, recovers_Z=False, key_match=False
+  Step5     : T_H=eca35575822e3c58, keys match=True
+  Step6     : two-sided key confirmation ok -> ESTABLISHED
+
+  session state          : ESTABLISHED
+  K_PQC agreement        : True
+  G_PHY                  : True   (d_U=True, d_B=True, r_U=True)
+  |K_PHY|                : 128 bits (agreement=True)
+  session keys agree     : True
+  probe samples          : 1176  retained=0.755
+  BDR all / retained     : 0.0608 / 0.0023
+  KDR after reconcile    : 0.0000 (corrected=2 bits, failed blocks=0)
+  entropy budget (UE)    : H_inf=535.8 - leak=256 - 2log2(1/eps)=64 => 215.8 bits >= L=128? True
+  gate detail (UE)       : SNR=29.0 dB, reliable=0.864, checks={'snr': True, 'rounds': True, 'reliability': True, 'entropy': True}
+  entropy estimators     : MCV=0.705, Markov=0.616, Shannon=0.986 bits/sym, lag-1 rho=0.195
+  k_(U->B)               : 922ce98d34a23c8eb78d505f21f59046...
+  k_(B->U)               : 2309efd9ae5b502c41eff84ee896df02...
+  T_H                    : eca35575822e3c58f7ff2fdb53aa354eb45fe6a2d48ca762edf5557fd157ae0a
+  on-the-wire sizes (B)  : {'flight1': 10047, 'flight2': 10263, 'W': 270, 'mconf': 105, 'flight3': 88, 'flight4': 100, 'fin_u': 55, 'fin_b': 55, 'handshake_total': 20713}
+
+==============================================================================
+REGIME B -- degraded link: authenticated PQC-only fallback
+==============================================================================
+  Step1 UE  -> m1,sigma_U,Cert_U  (10047 B), sid=bf3166718d9d3c64
+  Step1 gNB : Verify(Cert_U,sigma_U,m1)=1, ReplayCheck=1
+  Step2     : probe_ctx bound, 24 rounds x 48 pilots, h_probe=4a796c3de02a18fa
+  Step3 gNB -> m2,sigma_B,Cert_B  (10263 B), |W|=270 B, leak=256 bits
+  Step3 UE  : sigma_B ok, K_PQC match=True
+  Step4     : T2=3e2cce8f4e93c105, BDR_raw=0.4757, KDR_post=0.4757, corrected=0
+  Step4 gate: g_U=False {'snr': False, 'rounds': True, 'reliability': True, 'entropy': True} | g_B=False {'snr': False, 'rounds': True, 'reliability': True, 'entropy': True}
+  Step4     : r_U=False, d_U=False, d_B=False, G_PHY=False, |K_PHY|=0 bits, match=True
+  Step4 Eve : BDR_raw=0.4688, BDR_post=0.4688, recovers_Z=False, key_match=False
+  Step5     : T_H=9d3a36a1bb9611de, keys match=True
+  Step6     : two-sided key confirmation ok -> ESTABLISHED
+
+  session state          : ESTABLISHED
+  K_PQC agreement        : True
+  G_PHY                  : False   (d_U=False, d_B=False, r_U=False)
+  |K_PHY|                : 0 bits (agreement=True)
+  session keys agree     : True
+  probe samples          : 1176  retained=0.750
+  BDR all / retained     : 0.4852 / 0.4757
+  KDR after reconcile    : 0.4757 (corrected=0 bits, failed blocks=4)
+  entropy budget (UE)    : H_inf=582.7 - leak=256 - 2log2(1/eps)=64 => 262.7 bits >= L=128? True
+  gate detail (UE)       : SNR=-6.3 dB, reliable=0.889, checks={'snr': False, 'rounds': True, 'reliability': True, 'entropy': True}
+  entropy estimators     : MCV=0.674, Markov=0.775, Shannon=0.980 bits/sym, lag-1 rho=0.004
+  k_(U->B)               : 06b6f6096fa9b60f899558a4db469839...
+  k_(B->U)               : bad1b833cff843b5eae128c511ca25ec...
+  T_H                    : 9d3a36a1bb9611de3cef1dcb5d35db38d29cb93e96dd1c68f7da8892222a5309
+  on-the-wire sizes (B)  : {'flight1': 10047, 'flight2': 10263, 'W': 270, 'mconf': 105, 'flight3': 88, 'flight4': 100, 'fin_u': 55, 'fin_b': 55, 'handshake_total': 20713}
+
+data plane: 3 UL records delivered=True, DL record delivered=True, replay rejected=True, expansion=66 B/record
+key-schedule dependency: session keys change when K_PQC, K_PHY or T_H changes -> OK
+ALL FUNCTIONAL CHECKS PASSED

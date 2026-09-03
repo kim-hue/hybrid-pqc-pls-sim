@@ -1,0 +1,20 @@
+name,goal,expected,observed,verdict,abort_stage,abort_reason
+A01-passive-eavesdrop,recover K_PHY from Eve's own CSI plus the public W and T_2,Eve's post-reconciliation BDR stays near 0.5; she never recovers Z,"mean BDR_post=0.4649, recovery=0.0%, K_PHY match=0.0%",PASS,,
+A02-rogue-ue-cert,impersonate the UE with a certificate from a rogue CA,abort in Step 1 (certificate chain),step1: UE certificate invalid,PASS,step1,UE certificate invalid
+A03-downgrade-alg-list,strip the strong suite from m1 (bidding-down),abort in Step 1 (sigma_U covers alg_list),step1: sigma_U verification failed,PASS,step1,sigma_U verification failed
+A04-replay-flight1,"replay a recorded, validly signed m1","abort in Step 1 (ReplayCheck(sid, N_U))","first session established=True; replay -> step1: ReplayCheck(sid, N_U) failed",PASS,step1,"ReplayCheck(sid, N_U) failed"
+A05-tamper-kem-ct,modify C_KEM so the two sides derive different K_PQC,abort in Step 3 (sigma_B covers C_KEM),step3: sigma_B verification failed,PASS,step3,sigma_B verification failed
+A06-tamper-helper-data,corrupt the public helper data W in flight,abort in Step 3 (sigma_B covers W),step3: sigma_B verification failed,PASS,step3,sigma_B verification failed
+A07-stale-probe-context,bind helper data of another campaign into a valid m2,abort in Step 3 (h_probe mismatch),step3: h_probe mismatch (probing context not bound),PASS,step3,h_probe mismatch (probing context not bound)
+A08-forge-tau3,force G_PHY by flipping d_U with a forged tau_3,abort in Step 4 (tau_3 MAC under k_gate),step4: tau_3 MAC verification failed,PASS,step4,tau_3 MAC verification failed
+A09-bitflip-m3,flip d_U and keep the original tau_3,abort in Step 4 (MAC covers m3),step4: tau_3 MAC verification failed,PASS,step4,tau_3 MAC verification failed
+A10-tamper-m4,flip G_PHY in the gNB's gate echo,abort in Step 4 (tau_4 MAC / echo consistency),step4: tau_4 MAC verification failed,PASS,step4,tau_4 MAC verification failed
+A11-inconsistent-gate,authenticated but logically inconsistent m4,abort in Step 4 (G_PHY = d_U AND d_B is checked),step4: inconsistent joint gate decision,PASS,step4,inconsistent joint gate decision
+A12-tamper-finished,modify fin_U so the gNB accepts a different key,abort in Step 6 (AEAD key confirmation),step6: UE key confirmation failed,PASS,step6,UE key confirmation failed
+A13-gphy-view-mismatch,make UE and gNB disagree on the PHY-mode flag,abort in Step 6 (G_PHY is in the confirmation AD),step6: UE key confirmation failed,PASS,step6,UE key confirmation failed
+A14-data-plane-replay-tamper,"replay a record, forge a record, swap the direction",delivery of fresh records only; all three rejected,"fresh ok=True, replay=True, tamper=True, dir-swap=True",PASS,,
+A15-pqc-compromise,derive the session keys knowing K_PQC and the whole transcript,keys remain unrecoverable while G_PHY = 1 (residual = |K_PHY|),"G_PHY=True: keys recovered=False, PQC-only fallback recovers=False",PASS,,
+A16-phy-compromise,derive the session keys knowing K_PHY and the whole transcript,keys remain unrecoverable: ML-KEM-768 (NIST level 3) still stands,keys recovered=False,PASS,,
+A17-rogue-gnb-cert,false base station: own m2 signed under a rogue CA,abort in Step 3 (gNB certificate chain),step3: gNB certificate invalid,PASS,step3,gNB certificate invalid
+A18-mitm-vs-unauth-pls,interpose between UE and gNB during the probing campaign,baseline PLS: undetectable MITM; hybrid: aborts in both directions,"unauthenticated baseline MITM succeeds 10/10; hybrid aborts (rogue UE cert=True, rogue gNB cert=True)",PASS,,
+A19-phy-jamming-fallback,deny the physical-layer contribution (jamming / decorrelation),session still ESTABLISHED with G_PHY = 0 and K_PHY = epsilon,"established=True, G_PHY=False, |K_PHY|=0 bits, d_U=False, d_B=False, r_U=False, BDR=0.454",PASS,done,
